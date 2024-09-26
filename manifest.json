@@ -6,5 +6,8 @@
     "action": {
       "default_popup": "generate-password.html",
       "default_icon": "key-icon.png"
+    },
+    "icons": {
+        "96": "key-icon.png"
     }
 }
