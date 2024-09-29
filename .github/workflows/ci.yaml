@@ -21,4 +21,4 @@ jobs:
           echo "$PRIVATE_KEY" > key.pem
           chmod 600 key.pem
           # Copy files to the EC2 instance
-          scp -o StrictHostKeyChecking=no -i key.pem -r ./ * $USER@$HOST:/home/ubuntu/password-generator-chrome-extension/
+          scp -o StrictHostKeyChecking=no -i key.pem -r ./* * $USER@$HOST:/home/ubuntu/password-generator-chrome-extension/
