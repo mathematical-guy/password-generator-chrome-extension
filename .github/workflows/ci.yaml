@@ -1,38 +1,15 @@
-name: CI/CD Pipeline
+name: Test Secrets
 
-on:
+on: 
   push:
     branches:
       - main
 
 jobs:
-  build:
+  test-secrets:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-
-  deploy:
-    runs-on: ubuntu-latest
-    needs: build
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-      - name: Display Environment variables
+      - name: Show Secrets
         run: |
           echo "EC2_HOST: ${{ secrets.EC2_HOST }}"
           echo "EC2_USER: ${{ secrets.EC2_USER }}"
-          echo "EC2_PRIVATE_KEY: (hidden for security purposes)"
-
-      - name: Deploy to EC2
-        env:
-          PRIVATE_KEY: ${{ secrets.EC2_PRIVATE_KEY }}
-          HOST: ${{ secrets.EC2_HOST }}
-          USER: ${{ secrets.EC2_USER }}
-        run: |
-          echo "$PRIVATE_KEY" > key.pem
-          chmod 600 key.pem
-          echo "Yaha tak sab theek hai"
-          scp -o StrictHostKeyChecking=no -i key.pem -r ./ * $USER@$HOST:/home/ubuntu/password-generator-chrome-extension
-
-
