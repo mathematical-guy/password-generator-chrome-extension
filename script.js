@@ -42,5 +42,5 @@ passwordBoxEle.addEventListener('click', () => {
 })
 
 document.addEventListener('DOMContentLoaded', () => {
-    generatedPasswordEle.innerText = generateRandomString(20);
+    generatedPasswordEle.innerText = generateRandomString(12);
 })

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> No Store Password Generator</title>
+    <link rel="icon" href="key-icon.png" type="image/x-icon">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+
+        header {
+            background-color: rgb(156, 243, 243);
+            color: white;
+            padding: 10px 0;
+            text-align: center;
+        }
+
+        h1 {
+            margin: 0;
+        }
+
+        .content {
+            margin: 20px;
+            padding: 20px;
+            background-color: white;
+            border-radius: 5px;
+            box-shadow: 0 2px 10px rgb(39, 205, 205);
+        }
+
+        button {
+            background-color: rgb(39, 205, 205);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: rgb(39, 205, 205);
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 14px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1> <img width="40px" src="./key-icon.png" alt=""> No Store Password Generator</h1>
+    </header>
+
+    <div class="content">
+        <h2>Generate a Strong Password (No Store)</h2>
+        <p>Use our easy-to-use password generator to create secure passwords that protect your online accounts.</p>
+        <button id="generate-button">Generate Password</button>
+        <p id="generated-password" style="margin-top: 20px; font-weight: bold;"></p>
+        <button id="copy-button" style="display:none;">Copy Password</button>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Password Generator Extension. All rights reserved.</p>
+        <p><a href="privacy-policy.html">Privacy Policy</a></p>
+    </footer>
+
+    <script>
+        document.getElementById('generate-button').addEventListener('click', function () {
+            const password = generatePassword(12); // Change length as needed
+            document.getElementById('generated-password').innerText = password;
+            document.getElementById('copy-button').style.display = 'inline';
+        });
+
+        document.getElementById('copy-button').addEventListener('click', function () {
+            const passwordText = document.getElementById('generated-password').innerText;
+            navigator.clipboard.writeText(passwordText);
+            alert('Password copied to clipboard!');
+        });
+
+        function generatePassword(length) {
+            const charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+";
+            let password = "";
+            for (let i = 0; i < length; i++) {
+                const randomIndex = Math.floor(Math.random() * charset.length);
+                password += charset[randomIndex];
+            }
+            return password;
+        }
+    </script>
+
+</body>
+
+</html>
