@@ -33,7 +33,7 @@ function changeImgTemporary() {
 }
 
 function copyPasswordToClipboard() {
-    navigator.clipboard.writeText(password);
+    navigator.clipboard.writeText(generatedPasswordEle.innerText);
     changeImgTemporary();
 }
 
