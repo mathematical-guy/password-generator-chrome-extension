@@ -26,8 +26,8 @@ jobs:
           USER: ${{ secrets.EC2_USER }}
         run: |
           echo "$PRIVATE_KEY"
-          echo "HOST"
-          echo "USER"
+          echo "$HOST"
+          echo "$USER"
           echo "$PRIVATE_KEY" > key.pem
           chmod 600 key.pem
           echo "Yaha tak sab theek hai"
