@@ -2,9 +2,6 @@ const passwordBoxEle = document.getElementById('password-box');
 const generatedPasswordEle = document.getElementById('generated-password');
 const imgIcon = document.getElementById('clipboard-icon');
 
-// Password Text
-
-
 // Icon Paths
 const copiedSuccessIcon = './copied-success.png';
 const clipBoardIcon = './copy-icon.png';
