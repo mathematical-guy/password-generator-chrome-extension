@@ -25,8 +25,12 @@ jobs:
           HOST: ${{ secrets.EC2_HOST }}
           USER: ${{ secrets.EC2_USER }}
         run: |
-          echo "$EC2_PRIVATE_KEY" > key.pem
+          echo "$PRIVATE_KEY"
+          echo "HOST"
+          echo "USER"
+          echo "$PRIVATE_KEY" > key.pem
           chmod 600 key.pem
+          echo "Yaha tak sab theek hai"
           scp -o StrictHostKeyChecking=no -i key.pem -r ./ * $USER@$HOST:/home/ubuntu/password-generator-chrome-extension
 
 
