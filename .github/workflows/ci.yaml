@@ -18,6 +18,11 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
+      - name: Display Environment variables
+        run: |
+          echo "EC2_HOST: ${{ secrets.EC2_HOST }}"
+          echo "EC2_USER: ${{ secrets.EC2_USER }}"
+          echo "EC2_PRIVATE_KEY: (hidden for security purposes)"
 
       - name: Deploy to EC2
         env:
@@ -25,7 +30,6 @@ jobs:
           HOST: ${{ secrets.EC2_HOST }}
           USER: ${{ secrets.EC2_USER }}
         run: |
-          echo "${{ secrets.EC2_HOST }}"
           echo "$PRIVATE_KEY" > key.pem
           chmod 600 key.pem
           echo "Yaha tak sab theek hai"
