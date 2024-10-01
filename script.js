@@ -2,12 +2,29 @@ const passwordBoxEle = document.getElementById('password-box');
 const generatedPasswordEle = document.getElementById('generated-password');
 const imgIcon = document.getElementById('clipboard-icon');
 
+const lengthParamEle = document.getElementById('lengthParam');
+const lengthParamDisplayEle = document.getElementById('lengthParamDisplay');
+
+
 // Icon Paths
 const copiedSuccessIcon = './copied-success.png';
 const clipBoardIcon = './copy-icon.png';
 
 
-function generateRandomString(length=10) {
+function changePasswordLength() {
+    lengthParamDisplayEle.innerText= lengthParamEle.value;
+
+    updatePasswordToDisplay();
+}
+
+
+function updatePasswordToDisplay() {
+    generatedPasswordEle.innerText = generateRandomString();
+}
+
+
+function generateRandomString() {
+    let length = lengthParamEle.value;
     const UPPER_CASE = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
     const LOWER_CASE = 'abcdefghijklmnopqrstuvwxyz';
     const DIGITS = '0123456789';
@@ -39,5 +56,9 @@ passwordBoxEle.addEventListener('click', () => {
 })
 
 document.addEventListener('DOMContentLoaded', () => {
-    generatedPasswordEle.innerText = generateRandomString(12);
+    updatePasswordToDisplay();
 })
+
+
+// oninput="changePasswordLength()"
+lengthParamEle.addEventListener('input', changePasswordLength);
