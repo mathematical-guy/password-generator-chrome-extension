@@ -70,13 +70,12 @@
         <h2>Generate a Strong Password (No Store)</h2>
         <p>Use our easy-to-use password generator to create secure passwords that protect your online accounts.</p>
         
-        <form id="passwordForm">
-            <label for="lengthParam">Choose Password Length</label>
-            <input type="range" id="lengthParam" min="6" max="30" value="12" class="slider" oninput="changePasswordLength()">
-            <output id="lengthParamDisplay">12</output>
-        </form>
-    
+        <label for="lengthParam">Choose Password Length</label>
+        <input type="range" id="lengthParam" min="6" max="30" value="12" class="slider" oninput="changePasswordLength()">
+        <output id="lengthParamDisplay">12</output>
+        <br><br><br>
         <button id="generate-button">Generate Password</button>
+    
         <p id="generated-password" style="margin-top: 20px; font-weight: bold;"></p>
         <button id="copy-button" style="display:none;">Copy Password</button>
     
