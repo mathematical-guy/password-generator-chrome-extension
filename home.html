@@ -52,6 +52,11 @@
             margin-top: 20px;
             font-size: 14px;
         }
+
+        form {
+            margin-top: 15px;
+            margin-bottom: 15px;
+        }
     </style>
 </head>
 
@@ -64,19 +69,35 @@
     <div class="content">
         <h2>Generate a Strong Password (No Store)</h2>
         <p>Use our easy-to-use password generator to create secure passwords that protect your online accounts.</p>
+        
+        <label for="lengthParam">Choose Password Length</label>
+        <input type="range" id="lengthParam" min="6" max="30" value="12" class="slider" oninput="changePasswordLength()">
+        <output id="lengthParamDisplay">12</output>
+        <br><br><br>
         <button id="generate-button">Generate Password</button>
+    
         <p id="generated-password" style="margin-top: 20px; font-weight: bold;"></p>
         <button id="copy-button" style="display:none;">Copy Password</button>
+    
     </div>
 
+    
     <footer>
         <p>&copy; 2024 Password Generator Extension. All rights reserved.</p>
         <p><a href="privacy-policy.html">Privacy Policy</a></p>
     </footer>
 
     <script>
+        let lengthParamEle = document.getElementById('lengthParam');
+        let lengthParamDisplayEle = document.getElementById('lengthParamDisplay');
+
+        function changePasswordLength () {
+            lengthParamDisplayEle.innerText= lengthParamEle.value;
+        }
+
+
         document.getElementById('generate-button').addEventListener('click', function () {
-            const password = generatePassword(12); // Change length as needed
+            const password = generatePassword(lengthParamEle.value); // Change length as needed
             document.getElementById('generated-password').innerText = password;
             document.getElementById('copy-button').style.display = 'inline';
         });
@@ -86,6 +107,12 @@
             navigator.clipboard.writeText(passwordText);
             alert('Password copied to clipboard!');
         });
+
+        console.log(document.passwordForm)
+
+        // document.registrationForm.lengthParam.oninput = function () {
+        //     document.registrationForm.lengthParam.value = document.registrationForm.lengthParam.value;
+        // }
 
         function generatePassword(length) {
             const charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+";
