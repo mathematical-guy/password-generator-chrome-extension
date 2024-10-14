@@ -69,18 +69,26 @@
     <div class="content">
         <h2>Generate a Strong Password (No Store)</h2>
         <p>Use our easy-to-use password generator to create secure passwords that protect your online accounts.</p>
-        
+
+        <div><label><input type="checkbox" id="uppercase" checked> Include Uppercase Letters</label></div>
+        <div><label><input type="checkbox" id="lowercase" checked> Include Lower Letters</label></div>
+        <div><label><input type="checkbox" id="numbers" checked> Include Numbers</label></div>
+        <div><label><input type="checkbox" id="special" checked> Include Special Characters</label></div>
+
         <label for="lengthParam">Choose Password Length</label>
-        <input type="range" id="lengthParam" min="6" max="30" value="12" class="slider" oninput="changePasswordLength()">
+        <input type="range" id="lengthParam" min="6" max="30" value="12" class="slider"
+            oninput="changePasswordLength()">
         <output id="lengthParamDisplay">12</output>
+
         <br><br><br>
         <button id="generate-button">Generate Password</button>
-    
+
         <p id="generated-password" style="margin-top: 20px; font-weight: bold;"></p>
-        <button id="copy-button" style="display:none;">Copy Password</button>
-    
+        <button id="copy-button">Copy Password</button>
+
         <p>
-            <a style="text-decoration: none;" href="https://chromewebstore.google.com/detail/no-store-password-generat/glaoieimcmmecopbjjadjickclkcemlc">
+            <a style="text-decoration: none;"
+                href="https://chromewebstore.google.com/detail/no-store-password-generat/glaoieimcmmecopbjjadjickclkcemlc">
                 <img width="20px" src="key-icon.png">
                 Or download the extensions & use on the browser
             </a>
@@ -88,7 +96,7 @@
 
     </div>
 
-    
+
     <footer>
         <p>&copy; 2024 Password Generator Extension. All rights reserved.</p>
         <p><a href="privacy-policy.html">Privacy Policy</a></p>
@@ -98,15 +106,64 @@
         let lengthParamEle = document.getElementById('lengthParam');
         let lengthParamDisplayEle = document.getElementById('lengthParamDisplay');
 
-        function changePasswordLength () {
-            lengthParamDisplayEle.innerText= lengthParamEle.value;
+        const includeUpperCaseEle = document.getElementById('uppercase');
+        const includeLowerCaseEle = document.getElementById('lowercase');
+        const includeNumberEle = document.getElementById('numbers');
+        const includeSpecialCharEle = document.getElementById('special');
+        
+        lengthParamEle.addEventListener('input', updatePasswordToDisplay);
+        includeLowerCaseEle.addEventListener('change', updatePasswordToDisplay);
+        includeUpperCaseEle.addEventListener('change', updatePasswordToDisplay);
+        includeNumberEle.addEventListener('change', updatePasswordToDisplay);
+        includeSpecialCharEle.addEventListener('change', updatePasswordToDisplay);
+
+        function changePasswordLength() {
+            lengthParamDisplayEle.innerText = lengthParamEle.value;
+        }
+
+        function generateRandomString() {
+            const UPPER_CASE = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+            const LOWER_CASE = 'abcdefghijklmnopqrstuvwxyz';
+            const DIGITS = '0123456789';
+            const SPECIAL_CHARACTERS = '!@#$%^&*();[]{}-_`~,.';
+
+            let length = lengthParamEle.value;
+
+            let characters = '';
+
+            if (includeLowerCaseEle.checked) {
+                characters += LOWER_CASE;
+            }
+            if (includeUpperCaseEle.checked) {
+                characters += UPPER_CASE;
+            }
+            if (includeSpecialCharEle.checked) {
+                characters += SPECIAL_CHARACTERS;
+            }
+            if (includeNumberEle.checked) {
+                characters += DIGITS;
+            }
+
+            // const characters = UPPER_CASE + LOWER_CASE + DIGITS + SPECIAL_CHARACTERS;
+            let result = '';
+            for (let i = 0; i < length; i++) {
+                const randomIndex = Math.floor(Math.random() * characters.length);
+                result += characters[randomIndex];
+            }
+            return result;
+        }
+
+
+        function updatePasswordToDisplay() {
+            const password = generateRandomString(); // Change length as needed
+            document.getElementById('generated-password').innerText = password;
         }
 
 
         document.getElementById('generate-button').addEventListener('click', function () {
-            const password = generatePassword(lengthParamEle.value); // Change length as needed
+            const password = generateRandomString(); // Change length as needed
             document.getElementById('generated-password').innerText = password;
-            document.getElementById('copy-button').style.display = 'inline';
+            // document.getElementById('copy-button').style.display = 'inline';
         });
 
         document.getElementById('copy-button').addEventListener('click', function () {
@@ -117,19 +174,23 @@
 
         console.log(document.passwordForm)
 
+        document.addEventListener('DOMContentLoaded', () => {
+            updatePasswordToDisplay();
+        })
+
         // document.registrationForm.lengthParam.oninput = function () {
         //     document.registrationForm.lengthParam.value = document.registrationForm.lengthParam.value;
         // }
 
-        function generatePassword(length) {
-            const charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+";
-            let password = "";
-            for (let i = 0; i < length; i++) {
-                const randomIndex = Math.floor(Math.random() * charset.length);
-                password += charset[randomIndex];
-            }
-            return password;
-        }
+        // function generatePassword(length) {
+        //     const charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+";
+        //     let password = "";
+        //     for (let i = 0; i < length; i++) {
+        //         const randomIndex = Math.floor(Math.random() * charset.length);
+        //         password += charset[randomIndex];
+        //     }
+        //     return password;
+        // }
     </script>
 
 </body>
